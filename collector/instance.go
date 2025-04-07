@@ -34,6 +34,7 @@ type instance struct {
 	flavor            string
 	version           semver.Version
 	versionMajorMinor float64
+	dsn               string
 }
 
 func newInstance(ctx context.Context, dsn string, maxOpenConns int) (*instance, error) {
@@ -45,6 +46,7 @@ func newInstance(ctx context.Context, dsn string, maxOpenConns int) (*instance, 
 	db.SetMaxOpenConns(maxOpenConns)
 	db.SetMaxIdleConns(1)
 	i.db = db
+	i.dsn = dsn
 
 	version, versionString, err := queryVersion(ctx, db)
 	if err != nil {
@@ -73,6 +75,10 @@ func newInstance(ctx context.Context, dsn string, maxOpenConns int) (*instance, 
 
 func (i *instance) getDB() *sql.DB {
 	return i.db
+}
+
+func (i *instance) getDSN() string {
+	return i.dsn
 }
 
 func (i *instance) Close() error {
