@@ -1,17 +1,24 @@
-# MySQL Server Exporter [![Build Status](https://travis-ci.org/prometheus/mysqld_exporter.svg)][travis]
-
-[![CircleCI](https://circleci.com/gh/prometheus/mysqld_exporter/tree/main.svg?style=shield)][circleci]
-[![Docker Repository on Quay](https://quay.io/repository/prometheus/mysqld-exporter/status)][quay]
-[![Docker Pulls](https://img.shields.io/docker/pulls/prom/mysqld-exporter.svg?maxAge=604800)][hub]
-[![Go Report Card](https://goreportcard.com/badge/github.com/prometheus/mysqld_exporter)](https://goreportcard.com/report/github.com/prometheus/mysqld_exporter)
+# MySQL Server & NDB Cluster Exporter
 
 Prometheus exporter for MySQL server metrics.
 
 Supported versions:
 * MySQL >= 5.6.
 * MariaDB >= 10.3
+* NDB Cluster >= 7.1.1
 
 NOTE: Not all collection methods are supported on MySQL/MariaDB < 5.6
+
+## NDB Cluster Patches
+
+> [!WARNING]
+> Modifications on this exporter are currently experimental.
+Use at your own risk.
+
+There is also a dashboard for NDB metrics of this exporter:
+[`mysqld-mixin/dashboards/mysql-ndb-cluster.json`](mysqld-mixin/dashboards/mysql-ndb-cluster.json)
+
+![NDB Cluster Dashboard Preview](.assets/mysql-ndb-cluster-dashboard-preview.png)
 
 ## Building and running
 
@@ -43,7 +50,7 @@ This exporter supports the multi-target pattern. This allows running a single in
 To use the multi-target functionality, send an http request to the endpoint `/probe?target=foo:3306` where target is set to the DSN of the MySQL instance to scrape metrics from.
 
 To avoid putting sensitive information like username and password in the URL, you can have multiple configurations in `config.my-cnf` file and match it by adding `&auth_module=<section>` to the request.
- 
+
 Sample config file for multiple configurations
 
         [client]
