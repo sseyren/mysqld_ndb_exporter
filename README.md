@@ -10,8 +10,20 @@ Prometheus exporter for MySQL server metrics.
 Supported versions:
 * MySQL >= 5.6.
 * MariaDB >= 10.3
+* NDB Cluster >= 7.1.1
 
 NOTE: Not all collection methods are supported on MySQL/MariaDB < 5.6
+
+## NDB Cluster Patches
+
+> [!WARNING]
+> Modifications on this exporter are currently experimental.
+Use at your own risk.
+
+There is also a dashboard for NDB metrics of this exporter:
+[`mysqld-mixin/dashboards/mysql-ndb-cluster.json`](mysqld-mixin/dashboards/mysql-ndb-cluster.json)
+
+![NDB Cluster Dashboard Preview](.assets/mysql-ndb-cluster-dashboard-preview.png)
 
 ## Building and running
 
